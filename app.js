@@ -7,7 +7,6 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
-
 const app = express();
 
 //미들웨어 사용
