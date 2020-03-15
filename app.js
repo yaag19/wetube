@@ -3,27 +3,23 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-
-//디폴트로 export하지 않았을 경우에 하는 import방법
-import { userRouter } from "./router";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+import globalRouter from "./routers/globalRouter";
+import routes from "./routes";
 
 const app = express();
 
-const handleHome = (req, res) => res.send("Hello from home");
-const handleProfile = (req, res, next) => res.send("you are on my profile~");
-
-
+//미들웨어 사용
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.get("/", handleHome);
-app.get("/profile", handleProfile);
-
 //라우터 사용
-app.use("/user", userRouter);
-
+app.use(routes.home, globalRouter);
+app.use(routes.users, userRouter);
+app.use(routes.videos, videoRouter);
 
 export default app;
