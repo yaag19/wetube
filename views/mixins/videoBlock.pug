@@ -1,0 +1,8 @@
+//- mixin()은 pug의 함수종류
+//- mixin을 사용 하는 이유 : 각각 다른 정보를 담고 있지만 같은 구조를 가지는 데이터들을 표시하기 위한 코드를 캡슐화하여 재사용하기 위해! *다른정보, 같은구조*
+
+mixin videoBlock(video ={})
+   .videoBlock
+        video.videoBlock__thumbnail(src=video.videoFile, controls="true")
+        h4.videoBlock__title=video.title
+        h6.videoBlock__views=video.views

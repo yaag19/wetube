@@ -1,4 +1,12 @@
 extends layouts/main
+include mixins/videoBlock
 
+//- +videoBlock({})안의 정보들이 videoBlock.pug에 전달되어 mixin videoBlock()함수를 실행시킴(그 함수의 내용은 html이 담겨 있음)
 block content
-    p hello home
+    .videos
+        each item in videos
+           +videoBlock({
+               title:item.title,
+               views:item.views,
+               videoFile:item.videoFile
+           })

@@ -1,7 +1,7 @@
 import routes from "./routes";
 
 export const localsMiddleware = (req, res, next) => {
-    //locals : 템플릿, 컨트롤러 등 전역적으로 사용할 수 있게 해 줌.
+    //locals : 지역변수를 템플릿, 컨트롤러 등에 전역적으로 사용할 수 있게 해 줌.?
     res.locals.siteName = "WeTube";
     res.locals.routes = routes;
 
