@@ -1,6 +1,3 @@
-import {
-    videos
-} from "../db"
 import routes from "../routes";
 /* views폴더에 home이라는 파일을 찾음. reder()의 첫번쨰 인자는 템플릿이고, 두번째 인자는 템플릿게 추가할 정보가 담긴 객체
  views폴더는 Express에서 app.set의 디폴트 폴더야*/
