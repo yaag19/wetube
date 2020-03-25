@@ -37,20 +37,31 @@ export const searchVideo = (req, res) => {
 
 
 //export const videos = (req, res) => res.render("videos");
-export const getUpload = (req, res) => res.render("upload", {
-    pageTitle: "Upload"
-});
+export const getUpload = (req, res) =>
+    res.render("upload", {
+        pageTitle: "Upload"
+    });
 
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
     const {
         body: {
-            file,
             title,
             description
+        },
+        file: {
+            path
         }
     } = req;
-    //To Do : Upload and save video
-    res.redirect(routes.videoDetail(10005));
+
+    const newVideo = await Video.create({
+        fileUrl: path,
+        title,
+        description,
+        //path: path.replace(/\\/g, "/")
+    });
+
+    console.log(newVideo);
+    res.redirect(routes.videoDetail(newVideo.id));
 }
 
 export const videoDetail = (req, res) => res.render("videoDetail", {

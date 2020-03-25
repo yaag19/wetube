@@ -1,5 +1,8 @@
+// db 연결설정에 관한 파일 
+// dotenv : 유저데이터등을 숨기기 위해 사용
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 mongoose.connect(
