@@ -1,12 +1,24 @@
 import routes from "../routes";
-/* views폴더에 home이라는 파일을 찾음. reder()의 첫번쨰 인자는 템플릿이고, 두번째 인자는 템플릿게 추가할 정보가 담긴 객체
- views폴더는 Express에서 app.set의 디폴트 폴더야*/
-export const videoHome = (req, res) => {
-    res.render("home", {
-        pageTitle: "Home",
-        videos
-    });
-}
+import Video from "../models/Video";
+
+export const videoHome = async (req, res) => {
+    try {
+        //await부분이 끝나기 전까지는 render부분을 실행하지 않음
+        //단, 성공이나 실패여부를 따지지 않음(끝났다는게 중요)
+        const videos = await Video.find({});
+        res.render("home", {
+            pageTitle: "Home",
+            videos
+        });
+    } catch (error) {
+        console.log(error);
+        res.render("home", {
+            pageTitle: "Home",
+            videos: []
+        });
+    }
+
+};
 
 
 export const searchVideo = (req, res) => {
@@ -20,7 +32,7 @@ export const searchVideo = (req, res) => {
         searchingBy,
         videos
     });
-}
+};
 
 
 
