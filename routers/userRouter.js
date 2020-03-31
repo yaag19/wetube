@@ -1,10 +1,9 @@
 import express from "express";
 import routes from "../routes";
 import {
-    users,
-    userDetail,
-    editProfile,
-    changePassword
+  userDetail,
+  editProfile,
+  changePassword
 } from "../controllers/userController";
 
 //userRouter라는 변수만 export하겠다
