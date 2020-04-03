@@ -15,6 +15,8 @@ app.use(helmet());
 app.set("view engine", "pug"); //pug 세팅, pug는 express의 view engine, views폴더가 디폴트
 //express.static : 주어진 directory에서  file을 전달하는 미들웨어 함수
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
