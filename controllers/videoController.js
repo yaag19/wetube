@@ -47,7 +47,6 @@ export const postUpload = async (req, res) => {
 };
 
 export const videoDetail = async (req, res) => {
-  //req.params.id
   const {
     params: { id },
   } = req;
@@ -72,6 +71,7 @@ export const getEditVideo = async (req, res) => {
     res.redirect(routes.home);
   }
 };
+
 //업데이트하고 redirect하는 역할
 export const postEditVideo = async (req, res) => {
   const {
