@@ -4,10 +4,8 @@ export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
 export const postJoin = (req, res) => {
-  //console.log("postJoin실행 : ");
-
   const {
-    body: { name, email, password, password2 }
+    body: { name, email, password, password2 },
   } = req;
   if (password !== password2) {
     res.status(400);
@@ -28,7 +26,6 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-//export const users = (req, res) => res.render("user");
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "User Detail" });
 export const editProfile = (req, res) =>

@@ -3,8 +3,6 @@ import Video from "../models/Video";
 
 export const videoHome = async (req, res) => {
   try {
-    //await부분이 끝나기 전까지는 render부분을 실행하지 않음
-    //단, 성공이나 실패여부를 따지지 않음(끝났다는게 중요)
     const videos = await Video.find({}).sort({ _id: -1 });
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
@@ -15,12 +13,12 @@ export const videoHome = async (req, res) => {
 
 export const searchVideo = async (req, res) => {
   const {
-    query: { term: searchingBy }
+    query: { term: searchingBy },
   } = req;
   let videos = [];
   try {
     videos = await Video.find({
-      title: { $regex: searchingBy, $options: "i" }
+      title: { $regex: searchingBy, $options: "i" },
     });
   } catch (error) {
     console.log(error);
@@ -28,20 +26,19 @@ export const searchVideo = async (req, res) => {
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
-//export const videos = (req, res) => res.render("videos");
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path }
+    file: { path },
   } = req;
 
   const newVideo = await Video.create({
     fileUrl: path,
     title,
-    description
+    description,
     //path: path.replace(/\\/g, "/")
   });
 
@@ -52,7 +49,7 @@ export const postUpload = async (req, res) => {
 export const videoDetail = async (req, res) => {
   //req.params.id
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     const video = await Video.findById(id);
@@ -66,7 +63,7 @@ export const videoDetail = async (req, res) => {
 //템플릿을 랜더링하는 역할
 export const getEditVideo = async (req, res) => {
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     const video = await Video.findById(id);
@@ -79,7 +76,7 @@ export const getEditVideo = async (req, res) => {
 export const postEditVideo = async (req, res) => {
   const {
     params: { id },
-    body: { title, description }
+    body: { title, description },
   } = req;
 
   try {
@@ -92,7 +89,7 @@ export const postEditVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     await Video.findOneAndRemove({ _id: id });
