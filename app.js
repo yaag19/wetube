@@ -4,10 +4,12 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { localsMiddleware } from "./middlewares";
+import passport from "passport";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import "./passport";
 const app = express();
 
 //미들웨어 사용
@@ -21,6 +23,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+//passport를 초기화 시킨후,
+app.use(passport.initialize());
+app.use(passport.session());
+
 //local변수를 global변수로 사용하도록 만들어 주는 미들웨어
 app.use(localsMiddleware);
 

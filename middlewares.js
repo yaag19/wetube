@@ -11,10 +11,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
 
-  res.locals.user = {
-    isAuthenticated: false,
-    id: 1,
-  };
+  //template들이 user에 접근 가능하도록 함?
+  res.locals.user = req.user || {};
   next();
 };
 
