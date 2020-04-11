@@ -6,11 +6,13 @@ import morgan from "morgan";
 import { localsMiddleware } from "./middlewares";
 import passport from "passport";
 import routes from "./routes";
+import session from "express-session";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import "./passport";
 const app = express();
+console.log(process.env.COOKIE_SECRET);
 
 //미들웨어 사용
 app.use(helmet());
@@ -23,6 +25,13 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false,
+  })
+);
 //passport를 초기화 시킨후,
 app.use(passport.initialize());
 app.use(passport.session());
