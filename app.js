@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
 import passport from "passport";
 import routes from "./routes";
@@ -13,7 +15,7 @@ import globalRouter from "./routers/globalRouter";
 import "./passport";
 const app = express();
 console.log(process.env.COOKIE_SECRET);
-
+const CookieStore = MongoStore(session);
 //미들웨어 사용
 app.use(helmet());
 app.set("view engine", "pug"); //pug 세팅, pug는 express의 view engine, views폴더가 디폴트
@@ -30,6 +32,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
 //passport를 초기화 시킨후,
