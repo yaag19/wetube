@@ -12,8 +12,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.routes = routes;
 
   //template들이 user에 접근 가능하도록 함?
-  res.locals.user = req.user || null;
-  console.log(req.user);
+  res.locals.loggedUser = req.user || null;
+  console.log(`req.user : ${req.user}`);
   next();
 };
 
